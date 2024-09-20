@@ -18,6 +18,7 @@ package org.eclipse.edc.connector.service.contractnegotiation;
 import io.opentelemetry.instrumentation.annotations.WithSpan;
 import org.eclipse.edc.connector.contract.spi.negotiation.observe.ContractNegotiationObservable;
 import org.eclipse.edc.connector.contract.spi.negotiation.store.ContractNegotiationStore;
+import org.eclipse.edc.connector.contract.spi.types.agreement.ContractAgreementApprovalMessage;
 import org.eclipse.edc.connector.contract.spi.types.agreement.ContractAgreementMessage;
 import org.eclipse.edc.connector.contract.spi.types.agreement.ContractAgreementVerificationMessage;
 import org.eclipse.edc.connector.contract.spi.types.agreement.ContractNegotiationEventMessage;
@@ -110,6 +111,18 @@ public class ContractNegotiationProtocolServiceImpl implements ContractNegotiati
                     monitor.debug("[Consumer] Contract agreement received. Validation successful.");
                     negotiation.setContractAgreement(message.getContractAgreement());
                     negotiation.transitionAgreed();
+                    update(negotiation);
+                    observable.invokeForEach(l -> l.agreed(negotiation));
+                }));
+    }
+
+    @Override
+    @WithSpan
+    @NotNull
+    public ServiceResult<ContractNegotiation> notifyApproved(ContractAgreementApprovalMessage message, ClaimToken claimToken) {
+        return transactionContext.execute(() -> getNegotiation(message)
+                .onSuccess(negotiation -> {
+                    negotiation.transitionAgreeing();
                     update(negotiation);
                     observable.invokeForEach(l -> l.agreed(negotiation));
                 }));

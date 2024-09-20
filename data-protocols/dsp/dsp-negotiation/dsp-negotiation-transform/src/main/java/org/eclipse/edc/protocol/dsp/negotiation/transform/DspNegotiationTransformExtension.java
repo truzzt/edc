@@ -15,6 +15,7 @@
 package org.eclipse.edc.protocol.dsp.negotiation.transform;
 
 import jakarta.json.Json;
+import org.eclipse.edc.protocol.dsp.negotiation.transform.from.JsonObjectFromContractAgreementApprovalMessageTransformer;
 import org.eclipse.edc.protocol.dsp.negotiation.transform.from.JsonObjectFromContractAgreementMessageTransformer;
 import org.eclipse.edc.protocol.dsp.negotiation.transform.from.JsonObjectFromContractAgreementVerificationMessageTransformer;
 import org.eclipse.edc.protocol.dsp.negotiation.transform.from.JsonObjectFromContractNegotiationEventMessageTransformer;
@@ -22,6 +23,7 @@ import org.eclipse.edc.protocol.dsp.negotiation.transform.from.JsonObjectFromCon
 import org.eclipse.edc.protocol.dsp.negotiation.transform.from.JsonObjectFromContractNegotiationTransformer;
 import org.eclipse.edc.protocol.dsp.negotiation.transform.from.JsonObjectFromContractOfferMessageTransformer;
 import org.eclipse.edc.protocol.dsp.negotiation.transform.from.JsonObjectFromContractRequestMessageTransformer;
+import org.eclipse.edc.protocol.dsp.negotiation.transform.to.JsonObjectToContractAgreementApprovalMessageTransformer;
 import org.eclipse.edc.protocol.dsp.negotiation.transform.to.JsonObjectToContractAgreementMessageTransformer;
 import org.eclipse.edc.protocol.dsp.negotiation.transform.to.JsonObjectToContractAgreementVerificationMessageTransformer;
 import org.eclipse.edc.protocol.dsp.negotiation.transform.to.JsonObjectToContractNegotiationEventMessageTransformer;
@@ -57,6 +59,7 @@ public class DspNegotiationTransformExtension implements ServiceExtension {
         var builderFactory = Json.createBuilderFactory(Map.of());
 
         registry.register(new JsonObjectFromContractAgreementMessageTransformer(builderFactory));
+        registry.register(new JsonObjectFromContractAgreementApprovalMessageTransformer(builderFactory));
         registry.register(new JsonObjectFromContractAgreementVerificationMessageTransformer(builderFactory));
         registry.register(new JsonObjectFromContractNegotiationEventMessageTransformer(builderFactory));
         registry.register(new JsonObjectFromContractNegotiationTerminationMessageTransformer(builderFactory));
@@ -65,6 +68,7 @@ public class DspNegotiationTransformExtension implements ServiceExtension {
         registry.register(new JsonObjectFromContractOfferMessageTransformer(builderFactory));
 
         registry.register(new JsonObjectToContractAgreementMessageTransformer());
+        registry.register(new JsonObjectToContractAgreementApprovalMessageTransformer());
         registry.register(new JsonObjectToContractAgreementVerificationMessageTransformer());
         registry.register(new JsonObjectToContractNegotiationEventMessageTransformer());
         registry.register(new JsonObjectToContractRequestMessageTransformer());

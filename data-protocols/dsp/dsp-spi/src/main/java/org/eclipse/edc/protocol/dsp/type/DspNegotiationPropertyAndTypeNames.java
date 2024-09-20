@@ -29,6 +29,7 @@ public interface DspNegotiationPropertyAndTypeNames {
     String DSPACE_TYPE_CONTRACT_OFFER_MESSAGE = DSPACE_SCHEMA + "ContractOfferMessage";
     String DSPACE_TYPE_CONTRACT_NEGOTIATION_EVENT_MESSAGE = DSPACE_SCHEMA + "ContractNegotiationEventMessage";
     String DSPACE_TYPE_CONTRACT_AGREEMENT_MESSAGE = DSPACE_SCHEMA + "ContractAgreementMessage";
+    String DSPACE_TYPE_CONTRACT_AGREEMENT_APPROVAL_MESSAGE = DSPACE_SCHEMA + "ContractAgreementApprovalMessage";
     String DSPACE_TYPE_CONTRACT_AGREEMENT_VERIFICATION_MESSAGE = DSPACE_SCHEMA + "ContractAgreementVerificationMessage";
     String DSPACE_TYPE_CONTRACT_NEGOTIATION_TERMINATION_MESSAGE = DSPACE_SCHEMA + "ContractNegotiationTerminationMessage";
 

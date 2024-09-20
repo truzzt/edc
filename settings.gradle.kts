@@ -15,7 +15,7 @@
  *
  */
 
-rootProject.name = "connector"
+rootProject.name = "edc-connector-fork"
 
 // this is needed to have access to snapshot builds of plugins
 pluginManagement {
@@ -169,6 +169,9 @@ include(":extensions:data-plane-selector:store:sql:data-plane-instance-store-sql
 // modules for launchers, i.e. runnable compositions of the app ------------------------------------
 include(":launchers:data-plane-server")
 include(":launchers:dpf-selector")
+
+include(":launchers:dev:provider")
+include(":launchers:dev:consumer")
 
 // extension points for a connector ----------------------------------------------------------------
 include(":spi:common:aggregate-service-spi")

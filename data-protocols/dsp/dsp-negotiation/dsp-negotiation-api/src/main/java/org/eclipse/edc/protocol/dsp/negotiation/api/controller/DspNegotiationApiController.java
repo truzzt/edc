@@ -24,6 +24,7 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.eclipse.edc.connector.contract.spi.types.agreement.ContractAgreementApprovalMessage;
 import org.eclipse.edc.connector.contract.spi.types.agreement.ContractAgreementMessage;
 import org.eclipse.edc.connector.contract.spi.types.agreement.ContractAgreementVerificationMessage;
 import org.eclipse.edc.connector.contract.spi.types.agreement.ContractNegotiationEventMessage;
@@ -284,6 +285,21 @@ public class DspNegotiationApiController {
                 .message(jsonObject)
                 .token(token)
                 .serviceCall(protocolService::notifyAgreed)
+                .build())
+                .map(cn -> Response.ok().build())
+                .orElse(createErrorResponse(id));
+    }
+
+    @POST
+    @Path("{id}" + AGREEMENT + "/approval")
+    public Response agreementApproval(@PathParam("id") String id,
+                                      JsonObject jsonObject,
+                                      @HeaderParam(AUTHORIZATION) String token) {
+        return handleMessage(MessageSpec.Builder.newInstance(ContractAgreementApprovalMessage.class)
+                .processId(id)
+                .message(jsonObject)
+                .token(token)
+                .serviceCall(protocolService::notifyApproved)
                 .build())
                 .map(cn -> Response.ok().build())
                 .orElse(createErrorResponse(id));

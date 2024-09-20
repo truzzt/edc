@@ -133,7 +133,7 @@ public class ProviderContractNegotiationManagerImpl extends AbstractContractNego
      */
     @WithSpan
     private boolean processRequested(ContractNegotiation negotiation) {
-        transitionToAgreeing(negotiation);
+        //transitionToAgreeing(negotiation);
         return true;
     }
 
